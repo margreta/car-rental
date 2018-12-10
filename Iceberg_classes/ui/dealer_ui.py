@@ -1,9 +1,13 @@
 
+import datetime
 from service.dealer_service import Dealer_service
+from service.car_service import Car_Service
+from models.car import Car
 
 class Dealer_Ui:
     def __init__(self):
         self.dealer_service = Dealer_service()
+        self.__car_service = Car_Service()
     
     def home_page(self):
         #Header:
@@ -68,25 +72,24 @@ class Dealer_Ui:
                 phone_num = phone_num.isnumeric()
                 self.dealer_service.cb_check_phone(phone_num)
             except:
-                print("Phone number needs to be all numbers, please try again!")
+                print("Phone number needs to be all numbers, please try again!\n")
+        print("")
         return name,driver_license,email,phone_num
 
     def confirm_customer(self, name):
-        confirm = input("Confirm customer information? (y/n) ".lower())
-        print("")
+        confirm = input("Confirm customer information? (y/n) \n".lower())
         if confirm == "y":
-            print("{} has been added to system".format(name.capitalize()))
+            print("{} has been added to system\n".format(name.capitalize()))
         elif confirm == "n":
-            print("Please choose action from the options list.")
-            print("")
+            print("Please choose action from the options list\n.")
         return confirm
     
     def options(self):
         print("Options: ")
-        contin = input("1. Continue\n2. Go back\n3. Go to homepage")
+        contin = input("1. Continue\n2. Go back\n3. Go to homepage\n")
         return contin
-    
-    def create_booking_2_of_5(self):
+        
+    def create_booking_2_of_5(self,name):
         #Header:
         print("DEALER/ Create booking")
         print("-" * 20)
@@ -98,10 +101,107 @@ class Dealer_Ui:
         card_num = input("Enter the card number: ")
         valid = input("Enter the validation time (MM/YY): ")
         cvc = input("Enter CVC: ")
-
-        print("Card information has been saved for {}".format(name.capitalize()))
-
+        print("")
+        print("Card information has been saved for {}\n".format(name.capitalize()))
         return card_num, valid, cvc
+
+
+    def create_booking_3_of_5(self):
+        #Header:
+        print("DEALER/ Create booking")
+        print("-" * 20)
+        print("(3 of 5)")
+
+        print("Please select date")
+        print("")
+
+        start_date = input("Enter start date (D/M/YYYY): ")
+        amount_of_days = int(input("Amount of days: "))
+        print("")
+        car_type = input("Car type A = $4000 \nCar type B = $3000 \nCar type C = $2000\nSelect a car type (A, B, C): ")
+
+        dt = datetime.datetime.strptime(start_date, "%d/%m/%Y")
+        tdelta = datetime.timedelta(days = amount_of_days)
+        end_date = dt + tdelta
+        print(end_date, "%d/%m/%Y\n" )
+        
+        return start_date, amount_of_days, car_type
+
+    def create_booking_4_of_5(self):
+        #Header:
+        print("DEALER/ Create booking/ Show all available cars")
+        print("-" * 20)
+        print("(4 of 5)\n")
+        print("Print available cars\n")
+
+        print("{:<13}{:<6}{:<7}{:<10}".format("Car lic.", "Type", "Price", "Car status"))
+        print("-" * 36)
+        self.__car_service.show_available_cars()
+        print("")
+
+        print("Extras: ")
+
+    def extras(self):
+        kasko_or_child_seat = input("1. Kasko insurance\n2. Child seat\n")
+        more_extras = input("More extras? (y/n)\n")
+        return kasko_or_child_seat, more_extras
+
+        
+    def create_booking_5_of_5(self):
+        #Header:
+        print("DEALER/ Create booking/ Billing type")
+        print("-" * 20)
+        print("(5 of 5)\n")
+        
+        print("Please choose billing type\n")
+        billing_type = input("1. Credit or debit card\n2. Billing to\n3. Cash\n4. Go back\n5. Go to home page\n")
+        return billing_type
+
+    def credit_debit_card(self):
+        card_name = input("Enter name of carholder: ")
+        card_number = input("Enter card number: ")
+        validation_time = input("Enter validation time (MM/YY)")
+            # Setja hér tékk hvort validation_time sé "stærri" tala en dagurinn í dag 
+            # ef svo er þá kemur villa að kortið sé útrunnið
+        return card_name, card_number, validation_time
+
+    def confirm_billing(self):
+        confirm = input("Confirm payment? (y/n)")
+        if confirm == "y":
+            print("Your payment has been made.")
+        elif confirm == "n":
+            print("You didn't confirm the payment, you'll be transported back to choose a billing type.\n") 
+        return confirm 
+        
+    def billing_to(self):
+        comp_name = input("Enter name of company: ")
+        amount = input("Enter amount to charge: ") 
+        due_date = input("Enter due date (D/M/YYYY): ")
+        return comp_name, amount, due_date
+
+    def cash(self, total_amount):
+        print("Amount due: {}\n".format(total_amount))
+        paid_amount = input("Enter amount paid: ")
+        return paid_amount
+
+    def print_change(self, change):
+        print("Change: {}".format(change))
+
+
+
+
+
+
+
+
+
+
+
+
+        
+##################################################################################################################
+
+ 
 
 
 

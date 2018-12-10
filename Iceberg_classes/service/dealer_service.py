@@ -1,9 +1,9 @@
 
-from repository.data_access import Data_Access
+from repository.car_repo import Car_Repo
 
 class Dealer_service:
     def __init__(self):
-        self.data_access = Data_Access()
+        self.car_repo = Car_Repo()
 
     def home_check(self, choice):
         if choice not in range(1,6):
@@ -31,8 +31,14 @@ class Dealer_service:
     def cb_check_phone(self, phone_num):
         if phone_num == False:
             raise Exception
+
+
+    # def extras(self):
+
     
 
+    def show_available_cars(self):
+        self.car_repo.show_available_cars()
 
 
 

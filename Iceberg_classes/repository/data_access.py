@@ -8,5 +8,12 @@ class Data_Access:
         
 
 
-
+    def show_available_cars(self):
+        
+        with open("car.csv", "r") as cars_file:
+            for line in cars_file.readlines():
+                license_num, car_type, price, status = line.strip().split(",")
+            
+                if status == "Available":
+                    print(line)   
     

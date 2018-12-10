@@ -14,3 +14,6 @@ class Car_Service:
 
     def get_cars(self):
         return self.__car_repos.get_cars()
+    
+    def show_available_cars(self):
+        return self.__car_repos.show_available_cars()

@@ -55,3 +55,12 @@ class Car_Repo:
                     else:
                         csv_writer.writerow(line)
 
+    def show_available_cars(self):
+        
+        with open("./data/car.csv", "r") as cars_file:
+            for line in cars_file.readlines():
+                license_num, car_type, price, status = line.strip().split(",")
+            
+                if status == "Available":
+                    print("{:<13}{:<6}{:<7}{:<10}".format(license_num, car_type, price, status))   
+    

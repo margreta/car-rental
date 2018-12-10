@@ -33,6 +33,7 @@ class Home_page:
             try: 
                 username = input("Username: ")
                 password = getpass("Password: ")
+                print("")
                 self.home_service.log_in(user,username)
             except:
                 print("Invalid log in, please try again!")
