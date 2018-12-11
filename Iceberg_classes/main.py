@@ -15,42 +15,6 @@ def car_type_price(inp_car_type):
         price = 2000 
     return price 
 
-def billing_types(billing_type):
-    """Takes in the custumers billing type and returns apropriate values"""
-    if billing_type == "1":
-        #Credit or debit card:
-        card_name, card_number, validation_time = dealer_ui.credit_debit_card()
-        return card_name, card_number, validation_time 
-
-    elif billing_type == "2":
-        #Send bill to travel agency:
-        comp_name, amount, due_date = dealer_ui.billing_to()
-        return comp_name, amount, due_date
-
-    elif billing_type == "3":
-        #Cash, calculates the change:
-        paid_amount = int(dealer_ui.cash(total_amount))
-        change = total_amount - paid_amount
-        dealer_ui.print_change(change)
-
-    elif billing_type == "4":
-        #Go back one step - go back and rechoose billing type:
-        current_page -= 1
-        skip_option = "y"
-
-    elif billing_type == "5":
-        #Go back to Dealer homepage:
-        confirm = "n"
-        continue
-
-    #If one of first three are chosen you need to confirm the payment:
-    if billing_type in "1,2,3":
-        again = dealer_ui.confirm_billing()
-        if again == "n":
-            #Start over:
-            skip_option = "y"
-            continue
-
 
 def main():
     #Initiate instances of the classes: 
@@ -117,7 +81,39 @@ def main():
                             #How is customer paying:
                             billing_type = dealer_ui.create_booking_5_of_5()
                             
+                        if billing_type == "1":
+                            #Credit or debit card:
+                            card_name, card_number, validation_time = dealer_ui.credit_debit_card()
+                            return card_name, card_number, validation_time 
 
+                        elif billing_type == "2":
+                            #Send bill to travel agency:
+                            comp_name, amount, due_date = dealer_ui.billing_to()
+                            return comp_name, amount, due_date
+
+                        elif billing_type == "3":
+                            #Cash, calculates the change:
+                            paid_amount = int(dealer_ui.cash(total_amount))
+                            change = total_amount - paid_amount
+                            dealer_ui.print_change(change)
+
+                        elif billing_type == "4":
+                            #Go back one step - go back and rechoose billing type:
+                            current_page -= 1
+                            skip_option = "y"
+
+                        elif billing_type == "5":
+                            #Go back to Dealer homepage:
+                            confirm = "n"
+                            continue
+
+                        #If one of first three are chosen you need to confirm the payment:
+                        if billing_type in "1,2,3":
+                            again = dealer_ui.confirm_billing()
+                            if again == "n":
+                                #Start over:
+                                skip_option = "y"
+                                continue
                         
                     elif contin == "2":
                         if current_page == 1: 

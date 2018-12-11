@@ -40,10 +40,10 @@ class Car_Repo:
 
     def remove_car(self, license_num):
 
-        with open("./data/car.csv", "r") as csv_file:
+        with open("./data/car.csv", "rw") as csv_file:
             csv_reader = csv.DictReader(csv_file)
 
-            with open("./data/new_cars.csv", "w") as new_file:
+            with open("./data/car.csv", "w") as new_file:
                 fieldnames = ["License_plate", "Type", "Price","Status"]
 
                 csv_writer = csv.DictWriter(new_file, fieldnames=fieldnames)
