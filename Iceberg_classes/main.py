@@ -1,6 +1,8 @@
 from ui.home_page_ui import Home_page
 from ui.dealer_ui import Dealer_Ui
 from ui.admin_ui import Admin_Ui
+from ui.overview_ui import Overview_Ui
+from service.overview_service import Look_up_c
 from models.car import Car
 
 def car_type_price(inp_car_type):
@@ -16,6 +18,10 @@ def car_type_price(inp_car_type):
 def main():
     ui = Home_page()
     user = ui.home()
+    ov = Overview_Ui()
+    ci = Look_up_c() 
+
+
     username = ui.log_in(user)
 
     dealer_ui = Dealer_Ui()
@@ -25,6 +31,7 @@ def main():
     while go_to_homepage == "y":
         if username == "dealer":
             choice = dealer_ui.home_page()
+            #DEALER : Create booking
             if choice == 1: 
                 #initializing variables: 
                 repeat = "y"
@@ -114,10 +121,41 @@ def main():
                         go_to_homepage = "y"
                         continue
 
-        # if choice == 2:
-            #Næsta aðgerð fyrir dealer (change booking) 
+            #DEALER : change booking
+            elif choice == 2:
+                pass
+            #DEALER : return rental
+            elif choice == 3:
+                pass
+                #Næsta aðgerð fyrir dealer (change booking) 
+            #DEALER : overview
+            elif choice == 4: 
+                ov_choice = ov.overview_menu()
+                if ov_choice == 1:
+                    ov.look_up_customer()
+                elif ov_choice == 2:
+                    car_choice = ov.car_overview()
+            
+                    if car_choice == 1:
+                        ci.get_cars(car_choice)
+                    elif car_choice == 2:
+                        ci.get_cars(car_choice)
+                    elif car_choice == 3:
+                        license_number = ov.specific_car_input(car_choice)
+                    elif car_choice == 4:
+                        ov.show_price_list()
+                    elif car_choice == 5:
+                        pass
+                        #send down to domain
+                        # #car_information_menu() #send to car_information_menu class #####
+                elif ov_choice == 3:
+                    pass
+                    #Hér er farið til baka í dealer homepage
+                ov.go_back()
+            #DEALER : log out (go back -- þarf að laga í print setningu)
+            elif choice == 5:
+                pass
 
-        
         elif username == "admin":
             choice = admin_ui.admin_home_page()
             if choice == 1:

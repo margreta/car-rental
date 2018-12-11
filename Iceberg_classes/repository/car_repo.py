@@ -63,5 +63,6 @@ class Car_Repo:
                 license_num, car_type, price, status = line.strip().split(",")
             
                 if status == "Available" and car_type == inp_car_type:
-                    print("{:<13}{:<6}{:<7}{:<10}".format(license_num, car_type, price, status))   
+                    print("{:<13}{:<6}{:<7}{:<10}".format(license_num, car_type, price, status))
+    
     
