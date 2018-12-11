@@ -23,6 +23,8 @@ def calculate_date(start_date, amount_of_days):
     end_date = dt + tdelta
     return end_date
 
+
+
 def main():
     #Initiate instances of the classes.
     dealer_ui = Dealer_Ui()
@@ -65,7 +67,7 @@ def main():
                         #Get card information for insurance.
                         if current_page == 1:
                             name = first_name + " " + last_name
-                            card_num, valid, cvc = dealer_ui.create_booking_2_of_5(name)
+                            card_num, validation_date, cvc = dealer_ui.create_booking_2_of_5(name)
                             current_page += 1
                         #Page 3 of 5 in creating a booking. 
                         #Get starting date of rent and the end date, also get the type of car customer wants to rent. 
@@ -128,11 +130,11 @@ def main():
 
                             #If one of first three are chosen you need to confirm the payment:
                             if billing_type in "1,2,3":
-                                again = dealer_ui.confirm_billing()
-                                if again == "n":
+                                confirm_payment = dealer_ui.confirm_billing()
+                                if confirm_payment == "n":
                                     #Start over:
                                     continue
-                                if again == "y":
+                                if confirm_payment == "y":
                                     pass
                                     #print the receipt
                     #If user doesn't confirm and wants to go back.    
@@ -155,9 +157,11 @@ def main():
                             continue
                         # confirm = "n"
                         # continue
+
+                    #If user doesn't confirm and wants to go to Dealers homepage.
                     elif contin == "3":
-                        go_to_homepage = "y"
-                        continue
+                        go_to_dealer_homepage = "y"
+                        break
 
             #DEALER : change booking
             elif choice == 2:

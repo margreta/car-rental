@@ -112,8 +112,8 @@ class Dealer_Ui:
         is_valid = False
         while is_valid == False:
             try: 
-                validation_date= input("Enter the validation time (MM/YY): ")
-                self.admin_service.check_if_card_is_valid(validation_date)
+                validation_date= input("Enter the validation time (M/YY): ")
+                self.dealer_service.check_if_card_is_valid(validation_date)
                 is_valid = True
             except:
                 print("Card is outdated, please use card with valid validation time.")
