@@ -99,14 +99,33 @@ class Dealer_Ui:
         print("DEALER/ Create booking")
         print("-" * 20)
         print("(2 of 5)")
-        print("The insurance of the rent")
-        print("")
+        print("The insurance of the rent\n")
+        
+        card = False
+        while card == False:
+            try: 
+                card_num = input("Enter the card number : ")
+                self.dealer_service.cb_check_card_num(card_num)
+                card = True
+            except:
+                print("Card number has 16 numbers, please do not use space or '-' between numbers.")
+        is_valid = False
+        while is_valid == False:
+            try: 
+                valid = input("Enter the validation time (MM/YY): ")
+                #self.. 
+                is_valid = True
+            except:
+                print("Card is outdated, please use card with valid validation time.")
+        cvc = False
+        while cvc == False:
+            try: 
+                cvc_num = input("Enter CVC: \nThree numbers positioned on the back of the card.")
+                self.dealer_service.cb_check_cvc(cvc_num)
+                cvc = True
+            except: 
+                print("The cvc is three digits, all numbers, please try again!\n")
 
-#Needs to validate these information
-        card_num = input("Enter the card number: ")
-        valid = input("Enter the validation time (MM/YY): ")
-        cvc = input("Enter CVC: ")
-        print("")
         print("Card information has been saved for {}\n".format(name))
         return card_num, valid, cvc
 
@@ -132,14 +151,12 @@ class Dealer_Ui:
                 self.admin_service.car_type_check(inp_car_type)
             except: 
                 print("Available types are A, B or C. Please choose one of those types!\n")
-    
+        return start_date, amount_of_days, inp_car_type 
 
-        dt = datetime.datetime.strptime(start_date, "%d/%m/%Y")
-        tdelta = datetime.timedelta(days = amount_of_days)
-        end_date = dt + tdelta
-        print(end_date, "%d/%m/%Y\n" )
+    def print_end_date(self,end_date):
+        print("End date of the rent: ", end_date)
         
-        return start_date, amount_of_days, inp_car_type
+       
 
     def create_booking_4_of_5(self,inp_car_type):
         #Header:
@@ -157,7 +174,8 @@ class Dealer_Ui:
 
     def extras(self):
         kasko_or_child_seat = input("1. Kasko insurance\n2. Child seat\n")
-        more_extras = input("More extras? (y/n)\n")
+        more_extras = input("More extras? (y/n)")
+        print("")
         return kasko_or_child_seat, more_extras
 
         
