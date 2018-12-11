@@ -121,9 +121,14 @@ def main():
         elif username == "admin":
             choice = admin_ui.admin_home_page()
             if choice == 1:
-                license_num, car_type, confirm, again = admin_ui.create_car_page()
-                price = car_type_price(car_type)
-                admin_ui.create_the_car(license_num, car_type, price)
+                again = "y"
+                counter = 0
+                while again == "y":
+                    license_num, car_type, confirm, again = admin_ui.create_car_page()
+                    price = car_type_price(car_type)
+                    admin_ui.create_the_car(license_num, car_type, price)
+                    counter += 1
+                admin_ui.counter_added_cars(counter)
             elif choice == 2:
                 admin_ui.remove_car()
             elif choice == 3:
