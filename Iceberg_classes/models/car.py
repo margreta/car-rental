@@ -1,5 +1,5 @@
 class Car: 
-    def __init__(self, car_type, license_num, price, status):
+    def __init__(self, license_num, car_type, price, status = "Available"):
         self.car_type = car_type
         self.license_num = license_num
         self.price = price

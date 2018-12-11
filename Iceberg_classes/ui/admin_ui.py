@@ -57,7 +57,7 @@ class Admin_Ui:
         
         
 
-    def create_car(self, status = "Available"): 
+    def create_car_page(self): 
         print("ADMIN/Create new car")
         print("-" *20)
 
@@ -72,6 +72,9 @@ class Admin_Ui:
         print("")
 
         again = input("Would you like to add another car? (y/n)")
-        new_car = Car(car_type, license_num, status)
+        return license_num, car_type, confirm, again
+
+    def create_the_car(self, license_num, car_type, price, status = "Available"):
+        new_car = Car(license_num, car_type, price, status)
         self.__car_service.add_cars(new_car)
-        return again
+        

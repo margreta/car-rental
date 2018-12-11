@@ -8,10 +8,11 @@ class Car_Repo:
 
     def add_cars(self, car):
         with open("./data/car.csv", "a+") as cars_file:
-            car_type = car.get_car_type()
             license_num = car.get_license_num()
+            car_type = car.get_car_type()
+            price = car.get_price()
             status = car.get_status()
-            cars_file.write("\n{},{},{}".format(license_num.upper(), car_type.upper(), status))
+            cars_file.write("\n{},{},{},{}".format(license_num.upper(), car_type.upper(),price, status))
 
     def mark_repair(self, repair_choice, license_num):
         with open("./data/car.csv", "r") as csv_file:
