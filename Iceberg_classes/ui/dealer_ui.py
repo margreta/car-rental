@@ -87,6 +87,7 @@ class Dealer_Ui:
     def options(self):
         print("Options: ")
         contin = input("1. Continue\n2. Go back\n3. Go to homepage\n")
+        print("")
         return contin
         
     def create_booking_2_of_5(self,name):
@@ -118,16 +119,16 @@ class Dealer_Ui:
         start_date = input("Enter start date (D/M/YYYY): ")
         amount_of_days = int(input("Amount of days: "))
         print("")
-        car_type = input("Car type A = $4000 \nCar type B = $3000 \nCar type C = $2000\nSelect a car type (A, B, C): ")
+        inp_car_type = input("Car type A = $4000 \nCar type B = $3000 \nCar type C = $2000\nSelect a car type (A, B, C): ")
 
         dt = datetime.datetime.strptime(start_date, "%d/%m/%Y")
         tdelta = datetime.timedelta(days = amount_of_days)
         end_date = dt + tdelta
         print(end_date, "%d/%m/%Y\n" )
         
-        return start_date, amount_of_days, car_type
+        return start_date, amount_of_days, inp_car_type
 
-    def create_booking_4_of_5(self):
+    def create_booking_4_of_5(self,inp_car_type):
         #Header:
         print("DEALER/ Create booking/ Show all available cars")
         print("-" * 20)
@@ -136,7 +137,7 @@ class Dealer_Ui:
 
         print("{:<13}{:<6}{:<7}{:<10}".format("Car lic.", "Type", "Price", "Car status"))
         print("-" * 36)
-        self.__car_service.show_available_cars()
+        self.__car_service.show_available_cars(inp_car_type)
         print("")
 
         print("Extras: ")

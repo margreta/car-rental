@@ -37,8 +37,8 @@ class Dealer_service:
 
     
 
-    def show_available_cars(self):
-        self.car_repo.show_available_cars()
+    # def show_available_cars(self, inp_car_type):
+    #     self.car_repo.show_available_cars(inp_car_type)
 
 
 
