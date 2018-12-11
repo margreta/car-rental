@@ -9,8 +9,8 @@ class Dealer_service:
         if choice not in range(1,6):
             raise Exception
     
-    def cb_check_name(self,name_alpha):
-        if name_alpha is False: 
+    def cb_check_name(self,first_name_alpha, last_name_alpha):       
+        if first_name_alpha == False or last_name_alpha == False: 
             raise Exception
 
     def cb_check_driver_license(self, driver):

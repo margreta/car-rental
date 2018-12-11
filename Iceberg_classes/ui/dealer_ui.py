@@ -2,12 +2,14 @@
 import datetime
 from service.dealer_service import Dealer_service
 from service.car_service import Car_Service
+from service.admin_service import Admin_service
 from models.car import Car
 
 class Dealer_Ui:
     def __init__(self):
         self.dealer_service = Dealer_service()
         self.__car_service = Car_Service()
+        self.admin_service = Admin_service()
     
     def home_page(self):
         #Header:
@@ -34,15 +36,17 @@ class Dealer_Ui:
         print("-" * 20)
         print("(1 of 5)")
 
-
-        name_alpha = False
-        while name_alpha == False:
+        last_name_alpha = False
+        first_name_alpha = False
+        while first_name_alpha == False or last_name_alpha == False: 
             try: 
-                name = input("Enter name of customer: ")
-                name_alpha = name.isalpha()
-                self.dealer_service.cb_check_name(name_alpha)
+                first_name= input("Enter first name: ").capitalize()
+                last_name = input("Enter last name: ").capitalize()
+                first_name_alpha = first_name.isalpha()
+                last_name_alpha = last_name.isalpha()
+                self.dealer_service.cb_check_name(first_name_alpha, last_name_alpha)
             except: 
-                print("Name cannot include numbers, please try again!")
+                print("Name cannot include numbers or spaces, please enter first name and last name seperately!")
                 print("")
 
         driver = False
@@ -74,12 +78,12 @@ class Dealer_Ui:
             except:
                 print("Phone number needs to be all numbers, please try again!\n")
         print("")
-        return name,driver_license,email,phone_num
+        return first_name, last_name, driver_license, email, phone_num
 
-    def confirm_customer(self, name):
+    def confirm_customer(self, first_name, last_name):
         confirm = input("Confirm customer information? (y/n) \n".lower())
         if confirm == "y":
-            print("{} has been added to system\n".format(name.capitalize()))
+            print("{} {} has been added to system\n".format(first_name.capitalize(), last_name.capitalize()))
         elif confirm == "n":
             print("Please choose action from the options list\n.")
         return confirm
@@ -103,7 +107,7 @@ class Dealer_Ui:
         valid = input("Enter the validation time (MM/YY): ")
         cvc = input("Enter CVC: ")
         print("")
-        print("Card information has been saved for {}\n".format(name.capitalize()))
+        print("Card information has been saved for {}\n".format(name))
         return card_num, valid, cvc
 
 
@@ -119,7 +123,16 @@ class Dealer_Ui:
         start_date = input("Enter start date (D/M/YYYY): ")
         amount_of_days = int(input("Amount of days: "))
         print("")
-        inp_car_type = input("Car type A = $4000 \nCar type B = $3000 \nCar type C = $2000\nSelect a car type (A, B, C): ")
+       
+        inp_car_type = " "
+        while inp_car_type not in "ABC":
+            try:
+                inp_car_type = input("Car type A = $4000 \nCar type B = $3000 \nCar type C = $2000\nSelect a car type (A, B, C): ").upper()
+                print("")
+                self.admin_service.car_type_check(inp_car_type)
+            except: 
+                print("Available types are A, B or C. Please choose one of those types!\n")
+    
 
         dt = datetime.datetime.strptime(start_date, "%d/%m/%Y")
         tdelta = datetime.timedelta(days = amount_of_days)

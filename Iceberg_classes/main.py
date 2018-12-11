@@ -40,8 +40,8 @@ def main():
 
                 while repeat == "y":
                     while confirm == "n":
-                        name, driver_license, email, phone_num = dealer_ui.create_booking_1_of_5()
-                        confirm = dealer_ui.confirm_customer(name)
+                        first_name, last_name, driver_license, email, phone_num = dealer_ui.create_booking_1_of_5()
+                        confirm = dealer_ui.confirm_customer(first_name, last_name)
                         current_page = 1
                     
                     if skip_option == "n":
@@ -49,6 +49,7 @@ def main():
                 
                     if contin == "1":
                         if current_page == 1:
+                            name = first_name + " " + last_name
                             card_num, valid, cvc = dealer_ui.create_booking_2_of_5(name)
                             current_page += 1
 
