@@ -112,8 +112,8 @@ class Dealer_Ui:
         is_valid = False
         while is_valid == False:
             try: 
-                valid = input("Enter the validation time (MM/YY): ")
-                #self.. 
+                validation_date= input("Enter the validation time (MM/YY): ")
+                self.admin_service.check_if_card_is_valid(validation_date)
                 is_valid = True
             except:
                 print("Card is outdated, please use card with valid validation time.")
@@ -127,7 +127,7 @@ class Dealer_Ui:
                 print("The cvc is three digits, all numbers, please try again!\n")
 
         print("Card information has been saved for {}\n".format(name))
-        return card_num, valid, cvc
+        return card_num, validation_date, cvc
 
 
     def create_booking_3_of_5(self):

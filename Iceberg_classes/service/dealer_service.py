@@ -41,6 +41,16 @@ class Dealer_service:
         if card_num_numeric == False:
             raise Exception
 
+    def check_if_card_is_valid(self, validation_date): 
+        tday = datetime.datetime.today()
+        dt = datetime.datetime.strptime(validation_date, "%m/%y")
+        end_date = dt - tday
+        difference = end_date.days
+        if difference < 0:
+            raise Exception
+
+        
+
     def cb_check_cvc(self,cvc):
         len_cvc = len(cvc)
         cvc_numeric = cvc.isnumeric()
