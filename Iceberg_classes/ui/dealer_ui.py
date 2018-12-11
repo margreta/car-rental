@@ -20,7 +20,7 @@ class Dealer_Ui:
         while choice not in range(1,6):
             try: 
                 print("Please choose an action: ")
-                choice = int(input("1. Create booking\n2. Change booking\n3. Return rental\n4. Overview\n5. Go back\n"))
+                choice = int(input("1. Create booking\n2. Change booking\n3. Return rental\n4. Overview\n5. Log out\n"))
                 print("")
                 self.dealer_service.home_check(choice)
             except: 
@@ -81,7 +81,7 @@ class Dealer_Ui:
         return first_name, last_name, driver_license, email, phone_num
 
     def confirm_customer(self, first_name, last_name):
-        confirm = input("Confirm customer information? (y/n) \n".lower())
+        confirm = input("Confirm customer information? (y/n)".lower())
         if confirm == "y":
             print("{} {} has been added to system\n".format(first_name.capitalize(), last_name.capitalize()))
         elif confirm == "n":
