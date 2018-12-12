@@ -3,11 +3,7 @@ from models.car import Car
 from models.booking import Booking
 
 class Booking_Repo: 
-    # def __init__(self):
-    #     self.car = []
-    #     self.booking = []
-        
-
+      
     #Overview action.
     def look_up_customer(self, custom_email):
         with open("./data/booking.csv", encoding="utf-8") as booking_file:

@@ -18,14 +18,14 @@ def cb_page_1_of_5(dealer_ui):
     return first_name, last_name, driver_license, email, phone_num, confirm, current_page
 
 def cb_page_2_of_5(dealer_ui,current_page,first_name, last_name):
-    #Get card information for insurance.
+    """Get card information for insurance."""
     name = first_name + " " + last_name
     card_num, validation_date, cvc = dealer_ui.create_booking_2_of_5(name)
     current_page += 1
     return card_num, validation_date, cvc, current_page 
 
 def cb_page_3_of_5(dealer_ui, current_page):
-    #Get starting date of rent and the end date, also get the type of car customer wants to rent.
+    """Get starting date of rent and the end date, also get the type of car customer wants to rent."""
     start_date, amount_of_days, inp_car_type = dealer_ui.create_booking_3_of_5()
     end_date = calculate_date(start_date, amount_of_days)
     price = car_type_price(inp_car_type)
@@ -34,6 +34,7 @@ def cb_page_3_of_5(dealer_ui, current_page):
     return start_date, amount_of_days, inp_car_type, current_page, price
 
 def cb_page_4_of_5(dealer_ui,skip_option,inp_car_type, current_page,more_extras = "y"):
+    """Calculates extras and returns total price"""
     #initiate the price counter.
     total_price = 0 
     skip_option = "n"
@@ -138,6 +139,7 @@ def main():
                             elif current_page == 4:
                                 #Get total amount to charge:
                                 total_amount = price + total_price
+                                total_amount = total_amount * amount_of_days
                                 #How is customer paying:
                                 billing_type = dealer_ui.create_booking_5_of_5()
                             
