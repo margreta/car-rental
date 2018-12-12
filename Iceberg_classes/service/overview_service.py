@@ -2,8 +2,7 @@ import csv
 from repository.car_repo import Car_Repo
 from repository.booking_repo import Booking_Repo
 
-#c = car/customer:
-class Look_up_c:
+class Overview_Service:
     def __init__(self):
         self.__cars_repo = Car_Repo()
         self.__booking_repo = Booking_Repo()
@@ -13,8 +12,11 @@ class Look_up_c:
             raise Exception
 
     def get_customer(self,custom_email):
-        self.__booking_repo.look_up_customer(custom_email)
-        # raise Exception
+        # if custom_email:
+        #     raise Exception
+        # else: 
+        #     self.__booking_repo.look_up_customer(custom_email)
+        #hér þarf að laga villutékk fyrir look up customer. 
 
     def car_menu_check(self, choice):
         if choice not in range (1,6):

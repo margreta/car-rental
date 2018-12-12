@@ -16,7 +16,7 @@ class Car_Repo:
         with open("./data/car.csv", "r+") as csv_file:
             csv_reader = csv.DictReader(csv_file)
 
-            with open("./data/new_cars.csv", "a+") as new_file:
+            with open("./data/new_cars.csv", "a+",newline="") as new_file:
                 fieldnames = ["License_plate", "Type", "Price","Status"]
 
                 csv_writer = csv.DictWriter(new_file, fieldnames = fieldnames)
@@ -44,7 +44,7 @@ class Car_Repo:
         with open("./data/car.csv", "r+") as csv_file:
             csv_reader = csv.DictReader(csv_file)
 
-            with open("./data/new_cars.csv", "a+") as new_file:
+            with open("./data/new_cars.csv", "a+",newline="") as new_file:
                 fieldnames = ["License_plate", "Type", "Price","Status"]
             
                 csv_writer = csv.DictWriter(new_file, fieldnames = fieldnames)
@@ -59,8 +59,7 @@ class Car_Repo:
     def cb_show_available_cars(self, inp_car_type):
         with open("./data/car.csv", "r+") as cars_file:
             for line in cars_file.readlines():
-                if line == "\n":
-                    continue
+
                 license_num, car_type, price, status = line.strip().split(",")
 
                 if status == "Available" and car_type == inp_car_type:
@@ -71,7 +70,7 @@ class Car_Repo:
         with open("./data/car.csv", "r+") as csv_file:
             csv_reader = csv.DictReader(csv_file)
 
-            with open("./data/new_cars.csv", "a+") as new_file:
+            with open("./data/new_cars.csv", "a+", newline="") as new_file:
                 fieldnames = ["License_plate", "Type", "Price","Status"]
 
                 csv_writer = csv.DictWriter(new_file, fieldnames = fieldnames)
@@ -92,8 +91,7 @@ class Car_Repo:
     def show_available_cars(self, car_choice):
         with open("./data/car.csv", "r") as cars_file:
             for line in cars_file.readlines():
-                if line == "\n":
-                    continue
+
                 license_num, car_type, price, status = line.strip().split(",")
                 if car_choice == 1:
                     if status == "Available":
@@ -106,8 +104,7 @@ class Car_Repo:
     def look_up_car(self, car_choice, license_number):
         with open("./data/car.csv", "r") as cars_file:
             for line in cars_file.readlines():
-                if line == "\n":
-                    continue
+
                 license_num, car_type, price, status = line.strip().split(",")
                 if car_choice == 3:
                     if license_num == license_number:

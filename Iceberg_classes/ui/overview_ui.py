@@ -1,11 +1,10 @@
-from service.overview_service import Look_up_c
-from models.booking import Booking
 
+from models.booking import Booking
+from service.overview_service import Overview_Service
 
 class Overview_Ui:
     def __init__(self):
-        self.__look_up_customer = Look_up_c()
-        self.__model_booking = Booking
+        self.__overview_service = Overview_Service()
 
     def overview_menu(self): 
         """the overview menu where the dealer can choose what he wants to review and see"""
@@ -16,7 +15,7 @@ class Overview_Ui:
             try:
                 print("Please choose 1, 2 or 3.")
                 choice = int(input("1. Look up customer\n2. Car information\n3. Go back\n"))
-                self.__look_up_customer.overview_check(choice) #hér þarf að runna í service fallinu.
+                self.__overview_service.overview_check(choice) #hér þarf að runna í service fallinu.
             except:                
                 print("Not a valid option, please select number from 1 to 3")
                 print("")
@@ -27,7 +26,7 @@ class Overview_Ui:
         while email == False:
             try:
                 custom_email = input("Please enter email of customer to find in system: ")
-                self.__look_up_customer.get_customer(custom_email)
+                self.__overview_service.get_customer(custom_email)
                 print("")
                 email = True
             except:
@@ -42,7 +41,7 @@ class Overview_Ui:
                 print("Choose action:")
                 print("")
                 car_choice = int(input("1. Show all available cars\n2. Show rented cars\n3. Look up a specific car\n4. Show price list\n5. Go back\n"))
-                self.__look_up_customer.car_menu_check(car_choice) #hér þarf að kalla í eitthvað í service fallinu
+                self.__overview_service.car_menu_check(car_choice) #hér þarf að kalla í eitthvað í service fallinu
             except:
                 print("Not a valid option, please select number from 1 to 5")
                 print("")
@@ -53,7 +52,7 @@ class Overview_Ui:
         while license_num == False:
             try:
                 license_number = input("Insert license plate: ")
-                self.__look_up_customer.valid_license_plate(car_choice,license_number)
+                self.__overview_service.valid_license_plate(car_choice,license_number)
                 license_num = True
             except:
                 print("License plate number does not exist in the system, please enter a valid number.")

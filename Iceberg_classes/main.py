@@ -4,7 +4,7 @@ from ui.home_page_ui import Home_page
 from ui.dealer_ui import Dealer_Ui
 from ui.admin_ui import Admin_Ui
 from ui.overview_ui import Overview_Ui
-from service.overview_service import Look_up_c
+from service.overview_service import Overview_Service
 from ui.return_rental_ui import Return_Rental
 from ui.change_booking_ui import Change_Booking_Ui
 
@@ -23,7 +23,7 @@ def cb_page_2_of_5(dealer_ui,current_page,first_name, last_name):
     name = first_name + " " + last_name
     card_num, validation_date, cvc = dealer_ui.create_booking_2_of_5(name)
     current_page += 1
-    return card_num, validation_date, cvc, current_page 
+    return card_num, validation_date, cvc, current_page, name 
 
 def cb_page_3_of_5(dealer_ui, current_page):
     """Get starting date of rent and the end date, also get the type of car customer wants to rent."""
@@ -97,7 +97,7 @@ def main():
     admin_ui = Admin_Ui()
     ui = Home_page()
     ov = Overview_Ui()
-    ci = Look_up_c() 
+    ci = Overview_Service() 
     rr = Return_Rental()
     cb = Change_Booking_Ui()
 
@@ -133,7 +133,7 @@ def main():
                         #If user confirms the inputs and wants to continue (contin = 1) with creating booking.
                         if contin == "1":                        
                             if current_page == 1:
-                                card_num, validation_date, cvc, current_page = cb_page_2_of_5(dealer_ui,current_page,first_name,last_name)
+                                card_num, validation_date, cvc, current_page, name = cb_page_2_of_5(dealer_ui,current_page,first_name,last_name)
                             elif current_page == 2:
                                 start_date, amount_of_days, inp_car_type, current_page, price = cb_page_3_of_5(dealer_ui,current_page)                        
                             elif current_page == 3: 
@@ -253,4 +253,9 @@ def main():
                     admin_ui.remove_car()
                 elif choice == 3:
                     admin_ui.mark_repair()
-main()        
+                elif choice == 4:
+                    go_to_homepage = "y"
+                    break
+
+
+main()
