@@ -59,8 +59,10 @@ class Car_Repo:
     def cb_show_available_cars(self, inp_car_type):
         with open("./data/car.csv", "r+") as cars_file:
             for line in cars_file.readlines():
+                if line == "\n":
+                    continue
                 license_num, car_type, price, status = line.strip().split(",")
-            
+
                 if status == "Available" and car_type == inp_car_type:
                     print("{:<13}{:<6}{:<7}{:<10}".format(license_num, car_type, price, status))
     
@@ -90,6 +92,8 @@ class Car_Repo:
     def show_available_cars(self, car_choice):
         with open("./data/car.csv", "r") as cars_file:
             for line in cars_file.readlines():
+                if line == "\n":
+                    continue
                 license_num, car_type, price, status = line.strip().split(",")
                 if car_choice == 1:
                     if status == "Available":
@@ -102,6 +106,8 @@ class Car_Repo:
     def look_up_car(self, car_choice, license_number):
         with open("./data/car.csv", "r") as cars_file:
             for line in cars_file.readlines():
+                if line == "\n":
+                    continue
                 license_num, car_type, price, status = line.strip().split(",")
                 if car_choice == 3:
                     if license_num == license_number:

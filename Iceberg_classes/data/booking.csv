@@ -1,4 +1,4 @@
-Name,Drivers_license,Email,Phone_number,Credit_card_insurance,Start_date, End_date,License_plate,Types,Price,Extras,Payment_type,Booking_status
+Name,Drivers_license,Email,Phone_number,Credit_card_insurance,Start_date,End_date,License_plate,Types,Price,Extras,Payment_type,Booking_status
 Anna Valdís Einarsdóttir,123436,annacool@gmail.com,898-0032,"4543-8433-4324-2342,02/18,233",2/3/2018,5/3/2018,OFD73,A,4000,car seat,debit card, new
 Sigga Herdís Guðmundsdóttir,123244,siggacool@gmail.com,432-4322,"4232-2342-3478-8764,05/29,343",10/10/2018,15/10/2018,KSA55,B,3000,kasko insurance,cash, cancelled
 Sara Brynjólfsdóttir,234245,sarabinnacool@hotmail.com,434-2321,"7654-5423-4545-6542-5435,6/32,432",10/11/2018,15/11/2018,UEI44,C,2000,,billing to, new

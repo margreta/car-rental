@@ -12,8 +12,9 @@ class Car_Service:
     def is_valid_car(self, cars):
         return True
 
-    def get_cars(self):
-        return self.__car_repos.get_cars()
+    # def get_cars(self):
+    #     return self.__car_repos.get_cars()
     
-    def show_available_cars(self, inp_car_type):
-        return self.__car_repos.show_available_cars(inp_car_type)
+    #cb = create booking.
+    def cb_show_available_cars(self, inp_car_type):
+        return self.__car_repos.cb_show_available_cars(inp_car_type)

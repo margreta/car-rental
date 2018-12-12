@@ -13,8 +13,8 @@ class Look_up_c:
             raise Exception
 
     def get_customer(self,custom_email):
-        if custom_email not in self.__booking_repo.look_up_customer(custom_email):
-            raise Exception
+        valid_email = self.__booking_repo.look_up_customer(custom_email)
+        # raise Exception
 
     def car_menu_check(self, choice):
         if choice not in range (1,6):
