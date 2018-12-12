@@ -6,6 +6,7 @@ from ui.admin_ui import Admin_Ui
 from ui.overview_ui import Overview_Ui
 from service.overview_service import Look_up_c
 from ui.return_rental_ui import Return_Rental
+from ui.change_booking_ui import Change_Booking_Ui
 
 from models.car import Car
 
@@ -98,6 +99,7 @@ def main():
     ov = Overview_Ui()
     ci = Look_up_c() 
     rr = Return_Rental()
+    cb = Change_Booking_Ui()
 
     
     #Homepage, program starts here, defines the user admin or dealer.
@@ -196,7 +198,13 @@ def main():
 
                 #DEALER : change booking
                 elif choice == 2:
-                    pass
+                    change_choice = cb.change_booking_menu()
+                    #Edit booking.
+                    if change_choice == 1:
+                        pass
+                    #Cancel booking.
+                    elif change_choice == 2:
+                        cb.cancel_booking()
                 #DEALER : return rental
                 elif choice == 3:
                     rr.return_rental_ui()

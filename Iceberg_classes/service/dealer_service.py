@@ -1,9 +1,11 @@
 import datetime
 from repository.car_repo import Car_Repo
+from repository.booking_repo import Booking_Repo
 
 class Dealer_service:
     def __init__(self):
         self.car_repo = Car_Repo()
+        self.booking_repo = Booking_Repo()
 
     def home_check(self, choice):
         if choice not in range(1,6):
@@ -63,7 +65,18 @@ class Dealer_service:
             raise Exception
         self.car_repo.return_rental(license_num)
 
+    #Change booking.
+    def change_check(self, change_choice):
+        if change_choice not in range (1,4):
+            raise Exception
 
+    def edit_check(self):
+        pass
+
+    def cancel_check(self, name):
+        if name == False:
+            raise Exception
+        self.booking_repo.cancel_booking(name)
 
         
 
