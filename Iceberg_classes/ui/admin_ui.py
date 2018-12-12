@@ -19,7 +19,7 @@ class Admin_Ui:
         choice = 7
         while choice not in range(1,5):
             try: 
-                choice = int(input("1. Create new car\n2. Remove car\n3. Mark car for repair\n4. Go back\n "))
+                choice = int(input("1. Create new car\n2. Remove car\n3. Mark car for repair\n4. Log out\n "))
                 print("")
                 self.admin_service.home_check(choice)
             except:
