@@ -28,6 +28,7 @@ class Overview_Ui:
             try:
                 custom_email = input("Please enter email of customer to find in system: ")
                 self.__look_up_customer.get_customer(custom_email)
+                print("")
                 email = True
             except:
                 print("Not a valid email, please enter a valid email.")
@@ -36,7 +37,7 @@ class Overview_Ui:
     def car_overview(self):
             # elif choice == "2":
         car_choice = 7
-        while car_choice not in range (1,6):
+        while car_choice not in range (1, 6):
             try:
                 print("Choose action:")
                 print("")

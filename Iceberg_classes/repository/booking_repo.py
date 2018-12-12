@@ -10,10 +10,14 @@ class Booking_Repo:
 
     #Overview action.
     def look_up_customer(self, custom_email):
-        with open("./data/booking.csv") as booking_file:
+        with open("./data/booking.csv", encoding="utf-8") as booking_file:
+            header = []
             for line in booking_file:
-                name,drivers_license,email,phone_number,credit_card_insurance,start_date, end_date,license_plate,types,price,extras,payment_type,booking_status = line.strip().split(",")
-                if email == custom_email:
-                    print(line)
-
+                list_line = line.strip().split(",")
+                file_email = list_line[2]
+                if file_email == "Email":
+                    header.extend(list_line)
+                if file_email == custom_email:
+                    for x in range(13): 
+                        print("{:>21}  {:<25}".format(header[x],list_line[x]))
     

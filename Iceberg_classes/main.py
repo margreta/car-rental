@@ -123,7 +123,7 @@ def main():
                         while confirm == "n":
                             first_name, last_name, driver_license, email, phone_num, confirm, current_page = cb_page_1_of_5(dealer_ui)
                         
-                        #Sometimes we don't want to get the option list. 
+                        #Option list that appears on every page, but in some cases we don't want it to run. 
                         if skip_option == "n":
                             contin = dealer_ui.options()
                         
@@ -169,7 +169,7 @@ def main():
 
                         #If user doesn't confirm and wants to go back.    
                         elif contin == "2":
-                            #Check the location.
+                            #Check the user location.
                             if current_page == 1: 
                                 go_to_dealer_homepage = "y"
                                 break
@@ -186,9 +186,7 @@ def main():
                             elif current_page == 4: 
                                 current_page -=1
                                 continue
-                            # confirm = "n"
-                            # continue
-
+                           
                         #If user doesn't confirm and wants to go to Dealers homepage.
                         elif contin == "3":
                             go_to_dealer_homepage = "y"

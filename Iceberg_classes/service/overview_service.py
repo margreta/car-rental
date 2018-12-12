@@ -13,7 +13,7 @@ class Look_up_c:
             raise Exception
 
     def get_customer(self,custom_email):
-        valid_email = self.__booking_repo.look_up_customer(custom_email)
+        self.__booking_repo.look_up_customer(custom_email)
         # raise Exception
 
     def car_menu_check(self, choice):
