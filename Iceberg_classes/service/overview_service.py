@@ -1,28 +1,19 @@
 import csv
-from repository.look_up_data import Look_in_data
+from repository.car_repo import Car_Repo
+from repository.booking_repo import Booking_Repo
 
 #c = car/customer:
 class Look_up_c:
     def __init__(self):
-        self.__cars_repo = Look_in_data()
+        self.__cars_repo = Car_Repo()
+        self.__booking_repo = Booking_Repo()
     
     def overview_check(self, choice):
         if choice not in range(1,4):
             raise Exception
 
     def get_customer(self,custom_email):
-        self.__cars_repo.look_up_customer(custom_email)
-        if custom_email in self.__cars_repo.look_up_customer(custom_email):
-            for letter in custom_email:
-                if letter == "@":
-                    email = True
-                    break
-                else:
-                    email = False
-            if custom_email == "@":
-                email = False        
-        
-        elif custom_email not in self.__cars_repo.look_up_customer(custom_email):
+        if custom_email not in self.__booking_repo.look_up_customer(custom_email):
             raise Exception
 
     def car_menu_check(self, choice):

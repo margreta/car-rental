@@ -28,7 +28,7 @@ class Overview_Ui:
             try:
                 custom_email = input("Please enter email of customer to find in system: ")
                 self.__look_up_customer.get_customer(custom_email)
-                break
+                email = True
             except:
                 print("Not a valid email, please enter a valid email.")
                 print("")

@@ -167,7 +167,7 @@ class Dealer_Ui:
 
         print("{:<13}{:<6}{:<7}{:<10}".format("Car lic.", "Type", "Price", "Car status"))
         print("-" * 36)
-        self.__car_service.show_available_cars(inp_car_type)
+        self.__car_service.cb_show_available_cars(inp_car_type)
         print("")
 
         print("Extras: ")

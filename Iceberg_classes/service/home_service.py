@@ -1,8 +1,8 @@
-from repository.data_access import Data_Access
+from repository.car_repo import Car_Repo
 
 class Home_service:
     def __init__(self):
-        self.data_access = Data_Access()
+        self.car_repo = Car_Repo
     
     def log_in(self,user,username):
         if user == "1":

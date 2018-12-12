@@ -5,7 +5,46 @@ from ui.dealer_ui import Dealer_Ui
 from ui.admin_ui import Admin_Ui
 from ui.overview_ui import Overview_Ui
 from service.overview_service import Look_up_c
+from ui.return_rental_ui import Return_Rental
+
 from models.car import Car
+
+#cb = create booking. 
+def cb_page_1_of_5(dealer_ui):
+    """Get variables needed to create a booking""" 
+    first_name, last_name, driver_license, email, phone_num = dealer_ui.create_booking_1_of_5()
+    confirm = dealer_ui.confirm_customer(first_name, last_name)
+    current_page = 1
+    return first_name, last_name, driver_license, email, phone_num, confirm, current_page
+
+def cb_page_2_of_5(dealer_ui,current_page,first_name, last_name):
+    #Get card information for insurance.
+    name = first_name + " " + last_name
+    card_num, validation_date, cvc = dealer_ui.create_booking_2_of_5(name)
+    current_page += 1
+    return card_num, validation_date, cvc, current_page 
+
+def cb_page_3_of_5(dealer_ui, current_page):
+    #Get starting date of rent and the end date, also get the type of car customer wants to rent.
+    start_date, amount_of_days, inp_car_type = dealer_ui.create_booking_3_of_5()
+    end_date = calculate_date(start_date, amount_of_days)
+    price = car_type_price(inp_car_type)
+    dealer_ui.print_end_date(end_date)
+    current_page += 1
+    return start_date, amount_of_days, inp_car_type, current_page, price
+
+def cb_page_4_of_5(dealer_ui,skip_option,inp_car_type,more_extras,total_price, current_page):
+    #initiate the price counter.
+    total_price = 0 
+    skip_option = "n"
+    #Calculates extras, if customer wants.   -- ATH hér þarf að bæta við möguleika að velja ekkert extra. 
+    dealer_ui.create_booking_4_of_5(inp_car_type)
+    more_extras = "y"
+    while more_extras == "y":
+        more_extras, total_price = extras(dealer_ui,total_price)
+    current_page += 1
+    return total_price, skip_option, current_page
+
 
 def car_type_price(inp_car_type):
     """sets correct price related to the car type"""
@@ -23,7 +62,33 @@ def calculate_date(start_date, amount_of_days):
     end_date = dt + tdelta
     return end_date
 
+def extras(dealer_ui, total_price):
+    kasko_or_child_seat, more_extras = dealer_ui.extras()
+    if kasko_or_child_seat == "1": 
+        #Kasko costs $1
+        total_price += 1 
+    elif kasko_or_child_seat == "2":
+        #Child seat costs $50
+        total_price += 50
+    return more_extras, total_price
 
+
+def billing_type_1(dealer_ui):
+    #Credit or debit card:
+    card_name, card_number, validation_time = dealer_ui.credit_debit_card()
+    return card_name, card_number, validation_time 
+
+def billing_type_2(dealer_ui):
+    #Send bill to travel agency:
+    comp_name, amount, due_date = dealer_ui.billing_to()
+    return comp_name, amount, due_date
+
+def billing_type_3(dealer_ui, total_amount):
+    #Cash, calculates the change:
+    paid_amount = int(dealer_ui.cash(total_amount))
+    change = paid_amount - total_amount
+    dealer_ui.print_change(change)
+    return paid_amount, change
 
 def main():
     #Initiate instances of the classes.
@@ -32,6 +97,7 @@ def main():
     ui = Home_page()
     ov = Overview_Ui()
     ci = Look_up_c() 
+    rr = Return_Rental()
 
     #Homepage, program starts here, defines the user admin or dealer.
     user = ui.home()
@@ -53,76 +119,36 @@ def main():
                 #While loop to provide possibility to travel back and forth on create booking pages. 
                 while repeat == "y":
                     while confirm == "n":
-                        #Page 1 of 5 in creating a booking. 
-                        #Get all variables needed to create a booking. 
-                        first_name, last_name, driver_license, email, phone_num = dealer_ui.create_booking_1_of_5()
-                        confirm = dealer_ui.confirm_customer(first_name, last_name)
-                        current_page = 1
+                        first_name, last_name, driver_license, email, phone_num, confirm, current_page = cb_page_1_of_5(dealer_ui)
+                    
                     #Sometimes we don't want to get the option list. 
                     if skip_option == "n":
                         contin = dealer_ui.options()
+                    
                     #If user confirms the inputs and wants to continue (contin = 1) with creating booking.
-                    if contin == "1":
-                        #Page 2 of 5 in creating a booking.
-                        #Get card information for insurance.
+                    if contin == "1":                        
                         if current_page == 1:
-                            name = first_name + " " + last_name
-                            card_num, validation_date, cvc = dealer_ui.create_booking_2_of_5(name)
-                            current_page += 1
-                        #Page 3 of 5 in creating a booking. 
-                        #Get starting date of rent and the end date, also get the type of car customer wants to rent. 
+                            card_num, validation_date, cvc, current_page = cb_page_2_of_5(dealer_ui,current_page,first_name,last_name)
                         elif current_page == 2:
-                            start_date, amount_of_days, inp_car_type = dealer_ui.create_booking_3_of_5()
-                            end_date = calculate_date(start_date, amount_of_days)
-                            price = car_type_price(inp_car_type)
-                            dealer_ui.print_end_date(end_date)
-                            current_page += 1
-                        #Page 4 of 5 in creating a booking. 
-                        #Calculates extras, if customer wants.   -- ATH hér þarf að bæta við möguleika að velja ekkert extra. 
+                            start_date, amount_of_days, inp_car_type, current_page, price = cb_page_3_of_5(dealer_ui,current_page)                        
                         elif current_page == 3: 
-                            #initiate the price counter.
-                            total_price = 0 
-                            skip_option = "n"
-
-                            dealer_ui.create_booking_4_of_5(inp_car_type)
-                            more_extras = "y"
-                            while more_extras == "y":
-                                kasko_or_child_seat, more_extras = dealer_ui.extras()
-                                if kasko_or_child_seat == "1": 
-                                    #Kasko costs $1
-                                    total_price += 1 
-                                elif kasko_or_child_seat == "2":
-                                    #Child seat costs $50
-                                    total_price += 50
-                            current_page += 1
-
+                            total_price, skip_option, current_page = cb_page_4_of_5(dealer_ui,skip_option,inp_car_type,more_extras,total_price, current_page)
                         elif current_page == 4:
                             #Get total amount to charge:
                             total_amount = price + total_price
                             #How is customer paying:
                             billing_type = dealer_ui.create_booking_5_of_5()
-                            
+                        
                             if billing_type == "1":
-                                #Credit or debit card:
-                                card_name, card_number, validation_time = dealer_ui.credit_debit_card()
-                                return card_name, card_number, validation_time 
-
+                                card_name, card_number, validation_time  = billing_type_1(dealer_ui)
                             elif billing_type == "2":
-                                #Send bill to travel agency:
-                                comp_name, amount, due_date = dealer_ui.billing_to()
-                                return comp_name, amount, due_date
-
+                                comp_name, amount, due_date = billing_type_2(dealer_ui)
                             elif billing_type == "3":
-                                #Cash, calculates the change:
-                                paid_amount = int(dealer_ui.cash(total_amount))
-                                change = paid_amount - total_amount
-                                dealer_ui.print_change(change)
-
+                                paid_amount, change = billing_type_3(dealer_ui, total_amount)
                             elif billing_type == "4":
                                 #Go back one step - go back and re-choose billing type:
                                 current_page -= 1
                                 skip_option = "y"
-
                             elif billing_type == "5":
                                 #Go back to Dealer homepage:
                                 confirm = "n"
@@ -137,6 +163,8 @@ def main():
                                 if confirm_payment == "y":
                                     pass
                                     #print the receipt
+
+
                     #If user doesn't confirm and wants to go back.    
                     elif contin == "2":
                         #Check the location.
@@ -147,10 +175,11 @@ def main():
                             confirm = "n"
                             skip_option = "n"
                             continue
-                        elif current_page == 3: 
+                        elif current_page == 3: #Lendi í veseni hér! 
                             current_page -= 1
                             confirm = "y"
                             skip_option = "y"
+                            contin = "1"
                             continue
                         elif current_page == 4: 
                             current_page -=1
@@ -168,8 +197,8 @@ def main():
                 pass
             #DEALER : return rental
             elif choice == 3:
-                pass
-                #Næsta aðgerð fyrir dealer (change booking) 
+                rr.return_rental_ui()
+                
             #DEALER : overview
             elif choice == 4: 
                 ov_choice = ov.overview_menu()

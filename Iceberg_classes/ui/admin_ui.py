@@ -27,7 +27,7 @@ class Admin_Ui:
                 print("")
         return choice
     
-    def remove_car_page(self):
+    def remove_car(self):
         #Header
         print("ADMIN/Remove car")
         print("-" *20)

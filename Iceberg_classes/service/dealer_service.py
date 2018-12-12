@@ -41,6 +41,7 @@ class Dealer_service:
         if card_num_numeric == False:
             raise Exception
 
+
     def check_if_card_is_valid(self, validation_date): 
         tday = datetime.datetime.today()
         dt = datetime.datetime.strptime(validation_date, "%m/%y")
@@ -48,8 +49,6 @@ class Dealer_service:
         difference = end_date.days
         if difference < 0:
             raise Exception
-
-        
 
     def cb_check_cvc(self,cvc):
         len_cvc = len(cvc)
@@ -59,15 +58,10 @@ class Dealer_service:
         if cvc_numeric == False:
             raise Exception
 
-
-
-
-    # def extras(self):
-
-    
-
-    # def show_available_cars(self, inp_car_type):
-    #     self.car_repo.show_available_cars(inp_car_type)
+    def valid_return(self, license_num):
+        if license_num == False:
+            raise Exception
+        self.car_repo.return_rental(license_num)
 
 
 
