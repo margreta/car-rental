@@ -1,4 +1,5 @@
-![Bear](Bear.png)
+
+![Bear](Bear.png)>
 ## **T-113-VLN1, Verklegt námskeið 1, 2018-3**
 
 ![header1](header1.png)
@@ -10,10 +11,10 @@
 4. Authors
 
 
-## **Introduction**
+## **1. Introduction**
 This program is used as booking system for car rental. It allows the car rental to keep track of bookings, registered cars and more information about the business.
 
-## **Data**
+## **2. Data**
 The program uses two csv datasets, one named cars.csv and another named booking.csv.
 You can find them here: (https://github.com/margreta/car-rental/tree/master/Iceberg_classes/data)
 
@@ -21,11 +22,11 @@ Cars.csv contains information about all registered cars. The informations are th
 
 Booking.csv contains personal information about the customer and what car it has rentend. In the system you can look up customer by its email. 
 
-## **Video**
+## **3. Video**
 This video below is an introduction to the program and it's functions
 
 
-## **Authors**
+## **4. Authors**
 - Anna Valdís Einarsdóttir - BSc in Business Administration with a minor in Computer Science
 - Arna María Ólafsdóttir - BSc in Business Administration with a minor in Computer Science
 - Margrét Anna Ágústsdóttir - BSc Computer Science
