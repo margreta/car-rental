@@ -12,7 +12,7 @@
 
 
 ## **1. Introduction**
-This program is used as booking system for car rental. It allows the car rental to keep track of bookings, registered cars and more information about the business.
+This program is a car rental booking system that allows the car rental company to easily create and manage bookings in addition to keep the car fleet updated. The system has two paths, admin and dealer, where the admin has its own actions and dealer has another. The admin is the controller, the one who can manipulate the fleet (for example add a new car to the system or remove one). 
 
 ## **2. Data**
 The program uses two csv datasets, one named cars.csv and another named booking.csv.
