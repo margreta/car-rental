@@ -1,4 +1,4 @@
-# **IceBerg Rentals**
+![Bear](Bear.png)
 ## **T-113-VLN1, Verklegt námskeið 1, 2018-3**
 
 ![header1](header1.png)
