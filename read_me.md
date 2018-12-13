@@ -17,7 +17,8 @@ The goal of this system is to make every day work easier for those in the car re
 
 ## **2. Data**
 The program uses two csv datasets, one named cars.csv and another named booking.csv.
-You can find them here: (https://github.com/margreta/car-rental/tree/master/Iceberg_classes/data)
+You can find them [here](https://github.com/margreta/car-rental/tree/master/Iceberg_classes/data)
+
 
 
 _**Cars.csv**_ contains information about all registered cars: 
@@ -55,6 +56,12 @@ This video below is an introduction to the program and it's functions
 - Margrét Anna Ágústsdóttir - BSc Computer Science
 - Sara Brynjólfsdóttir - BSc in Business Administration with a minor in Computer Science
 - Sigríður Herdís Guðmundsdóttir - BSc in Business Administration with a minor in Computer Science
+
+## **5. Installation**
+The system runs on Python.\
+First you have to sign in as “Admin” or “Dealer”, depending on what you are going to do.
+The username for the Admin log-in is “admin” and no specific password, and “dealer” and no specific password for the Dealer log-in.
+
 
 
 
