@@ -5,11 +5,11 @@
 ![header1](header1.png)
 
 ## **Table of contents**
-1. Introduction \
-2. Data \
-3. Video \
-4. Authors \ 
-5. Installation \
+1. Introduction 
+2. Data 
+3. Video 
+4. Authors 
+5. Installation 
 
 
 ## **1. Introduction**
